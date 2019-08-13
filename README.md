@@ -16,7 +16,8 @@ Furthermore, with the iterator helpers proposal, we can use common methods such 
 ## Use cases
 
 **Higher Order Iterators**
-Let's say we want to write a higher order iterator that takes in an unspecified iterator, does some transformation and returns a new iterator. The classic example is a map function. Our map function will take a function and an iterator, then return an iterator that applies  the function to each value.
+
+Let's say we want to write a higher order iterator (or HOI) that takes in an unspecified iterator, does some transformation and returns a new iterator. The classic example is a map function. Our map function will take a function and an iterator, then return an iterator that applies  the function to each value.
 
 ```
 function* map(f, iter) {
@@ -26,25 +27,7 @@ function* map(f, iter) {
 }
 ```
 
-If we try to feed a range of numbers into our map function, we either need to make an array filled with our range, or write our own range implementation.
-
-**Creating n components**
-
-Let's say we want to create 10 Dialog components. Without `Number.range` we'd have to do something like:
-
-```
-let dialogs = [];
-for (let i = 0; i < 10; i++) {
-  dialogs.push(<Dialog />);
-}
-<div> {dialogs} </div>
-```
-
-With `Number.range` (and the iterator helpers methods):
-
-```
-<div> {Number.range(0, 10).map(() => <Dialog />).collect()} </div>
-```
+`map` can take any generic iterator, allowing it to work over arrays, streams, etc. However it cannot work over a range of numbers unless we pass an array filled with our range, or write our own range implementation.
 
 ## Description
 
