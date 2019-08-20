@@ -11,7 +11,7 @@ Right now, iterating through a range of numbers requires a traditional `for (let
 
 The only way to functionally iterate over a range is to use an array, for instance `Array(n).fill().map((_, i) => console.log(i))`, but that's rather inefficient.
 
-Furthermore, with the iterator helpers proposal, we can use common methods such as `map/filter/reduce` on `Number.range`. This will allow users to write expressions that iterate over a range, which will be very useful cases such as JSX.
+Furthermore, with the iterator helpers proposal, we can use common methods such as `map/filter/reduce` on `Number.range`. This will allow users to write expressions that iterate over a range, which will be very useful in expression based cases such as JSX.
 
 ## Use cases
 
@@ -28,6 +28,15 @@ function* map(f, iter) {
 ```
 
 `map` can take any generic iterator, allowing it to work over arrays, streams, etc. However it cannot work over a range of numbers unless we pass an array filled with our range, or write our own range implementation.
+
+**Lazy Streams**
+
+Number ranges also allows for lazy streams of numbers, similar to those of Haskell. For instance, `Number.range(0, Infinity)` is completely valid, as the iterator is lazy itself. 
+
+```
+const infinitePosts = map(() => <Post />, Number.range(0, Infinity))
+```
+
 
 ## Description
 
